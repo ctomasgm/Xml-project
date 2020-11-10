@@ -1,0 +1,27 @@
+//No terminales
+
+Elemento -> <NombreAtributos>Contenido</Nombre> |
+            <NombreAtributos/>
+
+Nombre -> L1N1
+
+L1 -> Letra|_
+N1 -> LetraN1|DigitoN1|-N1|_N1|.N1|∅
+
+Letra -> a|b|c|d|...|z|A|B|C|...|Z
+Digito -> 0|1|...|9
+
+Contenido -> Texto|Elemento|∅
+
+/*Antes de Nombre va un espacio*/
+Atributos ->  Nombre="Texto"Atributos|∅
+
+Texto -> Cualquier caracter excepto < > & ' "
+
+Comentario -> <!--Comentexto-->
+Comentexto -> Cualquier caracter excepto la secuencia --> ni la secuencia --
+
+//Reglas
+
+Element names can contain letters, digits, hyphens, underscores, and periods
+Element names cannot start with the letters xml (or XML, or Xml, etc)
