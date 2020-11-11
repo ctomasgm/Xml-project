@@ -5,6 +5,7 @@
 * Alejandro Aguirre 320646 
 * Victor Aguilar 320663
 */
+
 const fs = require('fs');
 const readline = require('readline');
 
@@ -34,7 +35,9 @@ function Gansito(entrada) {
     if(entrada.substring(entrada.length-2) !== '/>')
         return false;
     
-    return Atributos(entrada.substring(name.length+1, entrada.length-2));
+    const result = Atributos(entrada.substring(name.length+1, entrada.length-2));
+    
+    return result;
 }
 
 function Pinguinos(entrada) {
@@ -55,7 +58,7 @@ function Pinguinos(entrada) {
         endOfName = Math.min(firstSpace, firstGt);
     
     const name = entrada.substring(1, endOfName);
-    
+
     if(!Nombre(name))
         return false;
     
@@ -134,31 +137,30 @@ function Contenido(entrada) {
     while(i !== -1) {
         const primerMitad = entrada.substring(0, i+1);
         const segundaMitad = entrada.substring(i+1);
-        if(Elemento(primerMitad) && Contenido(segundaMitad)) {
-            // console.log(`sí cumplió [${primerMitad}][${segundaMitad}`)
+        if(Elemento(primerMitad) && Contenido(segundaMitad))
             return true;
-        } else {
-            // console.log(`no cumplió [${primerMitad}][${segundaMitad}`)
-        }
         i = entrada.indexOf('>', i+1);
     }
     return false;
 }
 
-function Atributos(entrada) {
+function Atributos(entrada, nombres = []) {
     if(entrada === '')
         return true;
     if(entrada.substring(0, 1) === ' '){
         const equalSign = entrada.indexOf('=');
         if(equalSign === -1)
             return false;
-        if(NombreAttr(entrada.substring(1,equalSign))){
+        const name = entrada.substring(1,equalSign)
+        if(NombreAttr(name) && !nombres.includes(name)){
             if(entrada.substring(equalSign+1, equalSign+2) === '"'){
                 const closingQuotes = entrada.indexOf('"', equalSign+2);
-                if(closingQuotes === -1)
+                if(closingQuotes === -1) {
                     return false;
-                if(Texto(entrada.substring(equalSign+2, closingQuotes))){
-                    return Atributos(entrada.substring(closingQuotes+1));
+                }
+                if(ValorAttr(entrada.substring(equalSign+2, closingQuotes))){
+                    nombres.push(name);
+                    return Atributos(entrada.substring(closingQuotes+1), nombres);
                 }
 
             }
@@ -174,11 +176,17 @@ function Texto(entrada) {
         return false;
     if(/&(?!(lt;|gt;|amp;|apos;|quot;))/.test(entrada))
         return false;   
+    return true; 
+}
+
+function ValorAttr(entrada) {
     if(entrada.includes('"'))
         return false;
-    if(entrada.includes("'"))
+    if(entrada.includes('<'))
         return false;
-    return true; 
+    if(entrada.includes('>'))
+        return false;
+    return true;
 }
 
 function Comentario(entrada) {
