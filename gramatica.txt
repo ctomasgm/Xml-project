@@ -20,9 +20,6 @@ Atributos ->  NombreAttr="ValorAttr"Atributos|∅
 
 ValorAttr -> Cualquier caracter excepto " < >
 
-Comentario -> <!--Comentexto-->
-Comentexto -> Cualquier caracter excepto la secuencia --> ni la secuencia --
-
 //Reglas
 
 Element names can contain letters, digits, hyphens, underscores, and periods
