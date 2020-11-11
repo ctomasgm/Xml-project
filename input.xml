@@ -1,11 +1,6 @@
-<mvc:View controllerName="App2.App2.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
-	<Shell id="shell">
-		<App id="app">
-			<pages>
-				<Page id="page" title="{i18ntitle}">
-					<content></content>
-				</Page>
-			</pages>
-		</App>
-	</Shell>
-</mvc:View>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>

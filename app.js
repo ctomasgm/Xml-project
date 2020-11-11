@@ -10,8 +10,10 @@ const fs = require('fs');
 const readline = require('readline');
 
 function main(data) {
-    console.log(data)
-    console.log(Elemento(data));
+    if(Elemento(data))
+        console.log('El archivo es un XML válido');
+    else
+        console.log('Se encontraron errores en el archivo de XML');
 }
 
 function Elemento(entrada) {
@@ -185,21 +187,6 @@ function ValorAttr(entrada) {
     if(entrada.includes('<'))
         return false;
     if(entrada.includes('>'))
-        return false;
-    return true;
-}
-
-function Comentario(entrada) {
-    if(entrada.substring(0, 4) !== '<!--')
-        return false;
-    if(entrada.substring(entrada.length-3) !== '-->')
-        return false;
-    return Comentexto(entrada.substring(4, entrada.length-3))
-    
-}
-
-function Comentexto(entrada) {
-    if(entrada.includes('--'))
         return false;
     return true;
 }
